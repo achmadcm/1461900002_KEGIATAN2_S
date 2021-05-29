@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class MahasiswaController extends Controller
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $siswa = DB::table('absen')
+        ->join('siswa', 'siswa.nis','=','absen.nis')
+        ->join('kelas', 'kelas.id_kelas','=','siswa.id_kelas')
+        ->get();
+        return view('mahasiswa0002', ['mahasiswa0002' => $siswa]);
     }
 
     /**
